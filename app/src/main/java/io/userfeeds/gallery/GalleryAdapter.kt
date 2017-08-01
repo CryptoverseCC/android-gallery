@@ -1,5 +1,6 @@
 package io.userfeeds.gallery
 
+import android.app.Activity
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -22,8 +23,10 @@ class GalleryAdapter(private val items: List<RankingItem>) : RecyclerView.Adapte
         val imageView = holder.itemView.findViewById(R.id.image) as ImageView
         val target = items[position].target
         val httpTarget = convertToHttp(target)
-        Glide.with(imageView.context)
+        Glide.with(imageView.context as Activity)
                 .load(httpTarget)
+                .override(512, 512)
+                .fitCenter()
                 .into(imageView)
     }
 
